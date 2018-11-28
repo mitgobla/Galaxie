@@ -20,6 +20,7 @@ respective owners.
 
 ------------------------------------------------------------
 
+- geotag
 
   (C) Geotag Icon Project. All rights reserved.
   <http://www.geotagicons.com/>
