@@ -38,6 +38,15 @@ mysql -u $SQLuser -p < /tmp/galaxie/galaxie_database.sql
 echo "Setting up IpTables"
 echo "Please enter API server IP address:"
 read APIipaddr
+# Check connection
+echo "Checking connection..."
+while  [ ! ping -c 1 $APIipaddr &> /dev/null ]
+do
+  echo "No connection to $APIipaddr. Is the address correct?"
+  echo "Please enter API server IP address:"
+  read APIipaddr
+done
+echo "Connection Avaliable to $APIipaddr"
 # Only allow connections to the database port from the API server.
 iptables -A INPUT -p tcp -s $APIipaddr --dport 3306 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
 iptables -A OUTPUT -p tcp --sport 3306 -m conntrack --ctstate ESTABLISHED -j ACCEPT
